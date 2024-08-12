@@ -103,8 +103,13 @@ function agregarGasto(e){
     //añade un nuevo gasto
     presupuesto.nuevoGasto(gasto);
 
+    //mensaje de gasto cargado
     ui.imprimirAlerta('Gasto agregado correctamente');
+    
+    //imprimir gasto
+    const {gastos} = presupuesto
+    ui.agregarGastoListado(gastos);
+
+    //reinicio de formulario
     formulario.reset();
-
-
 }
