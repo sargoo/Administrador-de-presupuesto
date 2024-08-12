@@ -59,6 +59,43 @@ class UI{
             divMensaje.remove();
         }, 3000)
     }
+
+    agregarGastoListado(gastos){
+
+        //eliminar el html previo
+
+        this.limpiarHTML();
+
+        //iterar sobre los gastos
+
+        gastos.forEach(gasto => {
+            const {cantidad, nombre, id} = gasto;
+
+            //crear un LI
+            const nuevoGasto = document.createElement('li');
+            nuevoGasto.className = 'list-group-item d-flex justify-content-between align-items-center';
+            nuevoGasto.dataset.id = id;
+            
+            //agregar html del gasto
+            nuevoGasto.innerHTML = `${nombre}<span class = "badge badge-primary badge-pill"> ${cantidad}`;
+
+            //boton para borrar el gasto 
+            const btnBorrar = document.createElement('button');
+            btnBorrar.classList.add('btn', 'btn-danger', 'borrar-gasto');
+            btnBorrar.innerHTML = 'borrar &times';
+            nuevoGasto.appendChild(btnBorrar);
+          
+            //agregar al html
+            gastoListado.appendChild(nuevoGasto);
+        });
+
+    }
+
+    limpiarHTML(){
+        while(gastoListado.firstChild){
+            gastoListado.removeChild(gastoListado.firstChild);
+        }
+    }
 }
 500
 //instanciar
