@@ -108,6 +108,25 @@ class UI{
     actualizarRestante(restante){
                 document.querySelector('#restante').textContent = restante;
     }
+
+    comprobarPresupuesto(presupuestoObj){
+
+        const restanteDiv = document.querySelector('.restante');
+        const {presupuesto, restante} = presupuestoObj;
+
+        if( (presupuesto / 4) > restante){
+            restanteDiv.classList.remove('alert-success');
+            restanteDiv.classList.add('alert-danger','alert-warning');
+        } else if((presupuesto / 2) > restante){
+            restanteDiv.classList.remove('alert-success');
+            restanteDiv.classList.add('alert-warning');
+        }
+
+        if (restante <= 0){
+            ui.imprimirAlerta('El presupuesto se ha agotado', 'error');
+            formulario.querySelector('button[type="submit"]').disabled = true;
+        }
+    }
 }
 
 //instanciar
@@ -161,6 +180,8 @@ function agregarGasto(e){
     ui.agregarGastoListado(gastos);
 
     ui.actualizarRestante(restante);
+
+    ui.comprobarPresupuesto(presupuesto);
 
     //reinicio de formulario
     formulario.reset();
